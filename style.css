@@ -1,6 +1,34 @@
+
+html { 
+    text-align: center;
+     font-family: sans-serif;
+     }
+
+body { 
+    width: 1250px; 
+    margin: 0 auto 0 auto;
+    text-align: left;
+    padding: 5px;
+ }
+header { 
+    width: 100%; 
+    display: table; 
+}
+
+nav { width: 300px; 
+    float: left; 
+    display: table;
+}
+
+article { 
+    width: 950px; 
+    display: table; 
+}
 footer {
-    position:absolute;
-    bottom:0;
-    width:90%;
-    height:30px;
+    text-align: center;  
+    display: table;  
+    position:absolute;  
+    bottom:0;  
+    width:90%;  
+    height:30px; 
 }
