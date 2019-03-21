@@ -14,8 +14,10 @@ body {
 header { 
     width: 100%; 
     display: table; 
-    padding: 20px;
-    margin: 0;
+    padding: 10px;
+    margin: 20px;
+    background-color: #ccc;  
+    text-indent: 50px;
 }
 
 article { 
@@ -43,7 +45,7 @@ form{
 
 #pageName{
     text-decoration: none;
-    color: none;
+    color: black;
 }
 
 a:link {
@@ -53,7 +55,7 @@ a:link {
 a:hover{
     color: red;
 }
-  
+
 
 nav { 
     width: 275px; 
