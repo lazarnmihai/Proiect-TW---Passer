@@ -12,7 +12,7 @@
 
 <body>
     <header>
-        <p>
+        <p id="p">
          <span>
                 <a href="register.html">Register</a>
                 |
@@ -23,7 +23,7 @@
     </header>
     
     <nav>
-        <ul id="menu">
+        <ul>
           <li><a href="home.html">Home</a></li>
           <li><a href="addNewAccount.html">Add New Account</a></li>
           <li><a href="category.html">Category</a></li>
@@ -32,6 +32,39 @@
 
     <article>
       <p>Adaugare cont nou</p>
+      <form>
+        <fieldset>
+          <table>
+            <tr>
+              <td><b>Username:</b></td>
+              <td><input type="text" id="usernameid" name="username" required placeholder="Username" size="35"><br><br></td>
+            </tr>
+            <tr>
+              <td><b>Password:</b></td>
+              <td><input type="password" id="passwordid" name="password" required placeholder="Password" size="35"><br><br></td>
+            </tr>
+            <tr>
+              <td><b>Repeat password:</b></td>
+              <td><input type="password" id="repeatedpasswordid" name="repeatedpassword" required placeholder="Repeat password" size="35"><br><br></td>
+            </tr>
+            <tr>
+              <td><b>Email:</b></td>
+              <td><input type="email" id="emailid" required placeholder="Adresa email" name="email" size="35" ><br><br></td>
+            </tr>
+            <tr>
+              <td><b>Category:</b></td>
+              <td><input type="text" id="categoryid" name="category" required placeholder="Category of the new account" size="35" ><br><br></td>
+            </tr>
+            <tr>
+              <td><b>Comment:</b></td>
+              <td><input type="text" id="commentid" name="comment" placeholder="Add a Comment.." size="35" maxlength="120" ><br><br></td>
+            </tr>
+            <tr>
+              <td colspan="2"><input type="submit" value="Add New Account"></td>
+            </tr>
+          </table>
+        </fieldset>
+      </form>
 
     </article>
 
