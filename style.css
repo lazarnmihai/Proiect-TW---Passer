@@ -3,32 +3,62 @@ html {
     text-align: center;
      font-family: sans-serif;
      }
-
+   
 body { 
     width: 1250px; 
-    margin: 0 auto 0 auto;
+    margin: 0;
     text-align: left;
     padding: 5px;
+    background-color: whitesmoke;
  }
 header { 
     width: 100%; 
     display: table; 
+    padding: 20px;
+    margin: 0;
 }
 
-nav { width: 300px; 
+nav { 
+    width: 275px; 
     float: left; 
     display: table;
 }
 
 article { 
     width: 950px; 
-    display: table; 
+    display: table;
 }
+
 footer {
     text-align: center;  
     display: table;  
     position:absolute;  
     bottom:0;  
-    width:90%;  
-    height:30px; 
+    width:99%;  
 }
+
+#p{
+    text-align: right;
+}
+
+form{
+    padding: 10px;
+    margin-block-start: 10px;
+    text-align: center;
+}
+
+#pageName{
+    text-decoration: none;
+    color: none;
+}
+
+a:link {
+    color:blue;
+}
+  
+a:hover{
+    color: red;
+}
+  
+
+
