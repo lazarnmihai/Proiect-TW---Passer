@@ -18,12 +18,6 @@ header {
     margin: 0;
 }
 
-nav { 
-    width: 275px; 
-    float: left; 
-    display: table;
-}
-
 article { 
     width: 950px; 
     display: table;
@@ -61,4 +55,29 @@ a:hover{
 }
   
 
+nav { 
+    width: 275px; 
+    float: left; 
+    display: table;
+}
 
+.nav-menu {
+    width: 200px;
+  }
+  
+.nav-menu a {
+    background-color: #eee;
+    color: black;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+  }
+  
+.nav-menu a:hover {
+    background-color: #ccc;
+  }
+  
+.nav-menu a.active {
+    background-color: #4CAF50;
+    color: white;
+  }
