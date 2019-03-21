@@ -33,11 +33,16 @@
     <article>
       <p>Adaugare cont nou</p>
       <form>
-        <fieldset>
-          <table>
+        <fieldset >
+          <table> 
             <tr>
               <td><b>Username:</b></td>
               <td><input type="text" id="usernameid" name="username" required placeholder="Username" size="35"><br><br></td>
+              <td colspan="4"></td>
+            </tr>
+            <tr>
+              <td><b>Email:</b></td>
+              <td><input type="email" id="emailid" required placeholder="Adresa email" name="email" size="35" ><br><br></td>
             </tr>
             <tr>
               <td><b>Password:</b></td>
@@ -48,12 +53,17 @@
               <td><input type="password" id="repeatedpasswordid" name="repeatedpassword" required placeholder="Repeat password" size="35"><br><br></td>
             </tr>
             <tr>
-              <td><b>Email:</b></td>
-              <td><input type="email" id="emailid" required placeholder="Adresa email" name="email" size="35" ><br><br></td>
-            </tr>
-            <tr>
               <td><b>Category:</b></td>
               <td><input type="text" id="categoryid" name="category" required placeholder="Category of the new account" size="35" ><br><br></td>
+              <td>
+                <select>
+                  <option value="" >Alege categoria</option>
+                  <option value="facebook">FaceBook</option>
+                  <option value="instagram">Instagrm</option>
+                  <option value="gmail">Gmail</option>
+                  <option value="yahoo">YahooMail</option>
+                </select>
+              </td>
             </tr>
             <tr>
               <td><b>Comment:</b></td>

@@ -13,7 +13,7 @@
 
 <body>
     <header>
-        <p>
+        <p id="p">
          <span>
                 <a href="register.html">Register</a>
                 |
@@ -24,7 +24,7 @@
     </header>
     
     <nav>
-        <ul id="menu">
+        <ul>
           <li><a href="home.html">Home</a></li>
           <li><a href="addNewAccount.html">Add New Account</a></li>
           <li><a href="category.html">Category</a></li>
@@ -33,6 +33,12 @@
 
     <article>
       <p>Logare in cont.</p>
+      <form>
+          <b>User name:</b><br>
+          <input type="text" id="usernameid" name="username" required placeholder="User name" size="35" ><br>
+          <b>Password:</b><br>
+          <input type="password" id="passwordid" name="password" required placeholder="Password" size="35" >
+      </form>
 
     </article>
 
