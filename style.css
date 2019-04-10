@@ -1,86 +1,94 @@
+*{ box-sizing: border-box; }
 
 html { 
     text-align: center;
-     font-family: sans-serif;
-     }
-   
+    font-family: serif;
+    }
 body { 
-    width: 1250px; 
-    margin: 0;
+    width: 97%; 
     text-align: left;
-    padding: 5px;
     background-color: whitesmoke;
- }
-header { 
-    width: 100%; 
-    display: table; 
-    padding: 10px;
-    margin: 20px;
+    margin: 1%;
+    }
+            
+.header { 
+    width: 97%; 
+    padding: 5px;
+    margin: 15px;
     background-color: #ccc;  
     text-indent: 50px;
-}
+    border-radius: 10px ;
+    }
 
-article { 
-    width: 930px; 
+.article { 
+    width: 80%; 
     display: table;
-}
+    padding: 5px;
+    margin: 10px;
+    }
 
-footer {
+.footer {
+    width: 93%; 
+    padding: 5px;
+    margin: 10px;
+    position: absolute;  
+    bottom: 0;
     text-align: center;  
-    display: table;  
-    position:absolute;  
-    bottom:0;  
-    width:99%;  
-}
+    }
 
-#p{
+
+
+.nav-menu { 
+    width: 15%; 
+    float: left; 
+    padding: 5px;
+    margin: 10px;
+    border-radius: 10px;
+    }
+ 
+.nav-menu a {
+    background-color: #eee;
+    color: black;
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    }
+    
+.nav-menu a:hover {
+    background-color: #ccc;
+    }
+    
+.nav-menu a.active {
+    background-color: #4CAF50;
+    color: white;
+    }
+
+h1{ font-size: 2.3vw; }
+h6{ font-size: 0.7vw; }
+
+
+#regLog{
+    padding-right: 15px;
     text-align: right;
-}
+    }
 
 form{
     padding: 10px;
     margin-block-start: 10px;
     text-align: center;
-}
+    }
 
 #pageName{
     text-decoration: none;
     color: black;
-}
+    }
 
 a:link {
     color:blue;
-}
-  
+    }
+    
 a:hover{
     color: red;
-}
+    }
 
 
-nav { 
-    width: 275px; 
-    float: left; 
-    display: table;
-    padding: 17px;
-}
-
-.nav-menu {
-    width: 200px;
-  }
-  
-.nav-menu a {
-    background-color: #eee;
-    color: black;
-    display: block;
-    padding: 12px;
-    text-decoration: none;
-  }
-  
-.nav-menu a:hover {
-    background-color: #ccc;
-  }
-  
-.nav-menu a.active {
-    background-color: #4CAF50;
-    color: white;
-  }
