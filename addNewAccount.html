@@ -6,13 +6,13 @@
     <title>&#9993 Passer</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 
   </head>
 
 <body>
   <div class="header">
-      <p id="regLog">
+      <p id="regLogHeader">
         <a href="register.html">Register</a> | <a href="login.html">Login</a>
       </p>
       <p>
@@ -30,49 +30,53 @@
   </div>
 
   <div class="article">
-    <p>Add a new account.</p>
-      <form>
-        <table> 
-          <tr>
-            <td><b>Username:</b></td>
-            <td><input type="text" id="usernameid" name="username" required placeholder="Username" size="35" autofocus><br><br></td>
-            <td colspan="4"></td>
-          </tr>
-          <tr>
-            <td><b>Email:</b></td>
-            <td><input type="email" id="emailid" required placeholder="Adresa email" name="email" size="35" ><br><br></td>
-          </tr>
-          <tr>
-            <td><b>Password:</b></td>
-            <td><input type="password" id="passwordid" name="password" required placeholder="Password" size="35"><br><br></td>
-          </tr>
-          <tr>
-            <td><b>Repeat password:</b></td>
-            <td><input type="password" id="repeatedpasswordid" name="repeatedpassword" required placeholder="Repeat password" size="35"><br><br></td>
-          </tr>
-          <tr>
-            <td><b>Category:</b></td>
-            <td><input type="text" id="categoryid" name="category" required placeholder="Category of the new account" size="35" ><br><br></td>
-            <td>
-              <select>
-                <option value="" >Alege categoria</option>
-                <option value="facebook">FaceBook</option>
-                <option value="instagram">Instagrm</option>
-                <option value="gmail">Gmail</option>
-                <option value="yahoo">YahooMail</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td><b>Comment:</b></td>
-            <td><input type="text" id="commentid" name="comment" placeholder="Add a Comment.." size="35" maxlength="120" ><br><br></td>
-          </tr>
-          <tr>
-            <td colspan="2"><input type="submit" value="Add New Account"></td>
-          </tr>
-        </table>
-      </form>
-  </div>
+      <div class="blockText">
+      <p>Add a new account.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam officia ad culpa animi libero, ducimus eaque doloribus repellat sed obcaecati tempora a, accusantium fuga vitae quisquam! Facere tempora consectetur explicabo.
+      </p>
+    </div>
+      <div class="blockForm">
+          <form>
+              <div class="row">
+                 <div class="col-25">
+                   <label>Username:</label><br></div>
+                 <div class="col-75">
+                   <input type="text" id="usernameid" name="username" required placeholder="Username" size="35" autofocus><br></div></div>
+              <div class="row">
+                 <div class="col-25">
+                    <label>Email:</label><br></div>
+                 <div class="col-75">
+                    <input type="email" id="emailid" required placeholder="Adresa email" name="email" size="35" ><br></div></div>
+              <div class="row">
+                 <div class="col-25">
+                    <label>Password:</label><br></div>
+                 <div class="col-75">
+                    <input type="password" id="passwordid" name="password" required placeholder="Password" size="35"><br></div></div>
+              <div class="row">
+                 <div class="col-25">
+                    <label>Repeat password:</label><br></div>
+                 <div class="col-75">
+                    <input type="password" id="repeatedpasswordid" name="repeatedpassword" required placeholder="Repeat password" size="35"><br></div></div>
+              <div class="row">
+                 <div class="col-25">
+                    <label>Category:</label><br></div>
+                 <div class="col-75">
+                    <select id="country" name="country">
+                        <option value="" >Alege categoria</option>
+                        <option value="facebook">FaceBook</option>
+                        <option value="instagram">Instagrm</option>
+                        <option value="gmail">Gmail</option>
+                        <option value="yahoo">YahooMail</option>
+                    </select><br></div></div>
+              <div class="row">
+                <div class="col-25">
+                    <label>Comment:</label><br></div>
+                <div class="col-75">
+                    <input type="text" id="commentid" name="comment" placeholder="Add a Comment.." size="35" maxlength="120" ><br></div></div><br>
+              <input type="submit" value="Add New Account">
+          </form>
+          </div>
+    </div>
 
   <div class="footer">
     <h6>

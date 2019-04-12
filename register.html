@@ -6,13 +6,13 @@
     <title>&#9993 Passer</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 
   </head>
 
 <body>
   <div class="header">
-      <p id="regLog">
+      <p id="regLogHeader">
         <a href="register.html">Register</a> | <a href="login.html">Login</a>
       </p>
       <p>
@@ -30,31 +30,35 @@
   </div>
   
   <div class="article">
-    <p>Create your new account. If you already have an account you can <a href="login.html" >Login.</a></p><br><br>
-      <form>
-        <table> 
-          <tr>
-            <td><b>Username:</b></td>
-            <td><input type="text" id="usernameid" name="username" required placeholder="Username" size="35" autofocus><br><br></td>
-          </tr>
-          <tr>
-            <td><b>Email:</b></td>
-            <td><input type="email" id="emailid" required placeholder="Adresa email" name="email" size="35" ><br><br></td>
-          </tr>
-          <tr>
-            <td><b>Password:</b></td>
-            <td><input type="password" id="passwordid" name="password" required placeholder="Password" size="35"><br><br></td>
-          </tr>
-          <tr>
-            <td><b>Repeat password:</b></td>
-            <td><input type="password" id="repeatedpasswordid" name="repeatedpassword" required placeholder="Repeat password" size="35"><br><br></td>
-          </tr>
-          <tr>
-            <td colspan="2"><input type="submit" value="Register"></td>
-          </tr>
-        </table>
-      </form>
-  </div>
+      <div class="blockText">
+         <p>Create your new account. If you already have an account you can <a href="login.html" >Login.</a></p><br><br>
+      </div>
+     <div class="blockForm" >
+        <form>
+            <div class="row">
+                <div class="col-25">
+                    <label>Username:</label><br></div>
+                <div class="col-75">
+                    <input type="text" id="usernameid" name="username" required placeholder="Username" size="35" autofocus><br></div></div>
+            <div class="row">
+                <div class="col-25">
+                    <label>Email:</label><br></div>
+                <div class="col-75">
+                    <input type="email" id="emailid" required placeholder="Adresa email" name="email" size="35" ><br></div></div>
+            <div class="row">
+                <div class="col-25">
+                    <label>Password:</label><br></div>
+                <div class="col-75">
+                    <input type="password" id="passwordid" name="password" required placeholder="Password" size="35"><br></div></div>
+            <div class="row">
+                <div class="col-25">
+                    <label>Repeat password:</label><br></div>
+                <div class="col-75">
+                    <input type="password" id="repeatedpasswordid" name="repeatedpassword" required placeholder="Repeat password" size="35"><br></div></div><br><br>           
+             <input type="submit" value="Register">              
+        </form>
+     </div>
+ </div>
 
   <div class="footer">
       <h6>
