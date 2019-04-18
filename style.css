@@ -142,12 +142,15 @@ input[type=text], select, input[type=password], input[type=email] {
 
 /* Links */
 a:link {
-    color:yellow;
+    color: blue;
     }
     
 a:hover{
     color: rgb(255, 0, 43);
     }
+#linkColor{
+    color: rgb(82, 28, 28);
+}
 
 /* Register/Login links in header */
 #regLogHeader{
