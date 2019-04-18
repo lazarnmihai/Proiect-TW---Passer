@@ -12,6 +12,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     }
+
             
 .header { 
     width: 97%; 
@@ -21,6 +22,7 @@ body {
     text-indent: 50px;
     border-radius: 10px ;
     height: 110px;
+    padding-bottom: 20px;
     }
 
 .article { 
@@ -43,14 +45,14 @@ body {
 
 /* Nav manu */
 .nav-menu { 
-    width: 15%; 
+    width: 13%; 
     float: left; 
     padding: 5px;
     margin: 10px;
     }
  
 .nav-menu a {
-    background-color: #eee;
+    background-color: rgb(187, 187, 187);
     color: black;
     display: block;
     padding: 10px;
@@ -69,9 +71,14 @@ body {
     }
 
 /* Text elements */
-h1{ font-size: 2.3vw; }
+h1{ font-size: 2.3vw;
+ }
 h6{ font-size: 0.7vw; }
-p { font-size: 1.15vw; }
+p { font-size: 1.15vw;
+    color: whitesmoke;
+    text-indent: 30px;
+    letter-spacing: 1px;
+ }
 
 
 /* Formular */
@@ -80,6 +87,7 @@ form{
     margin-block-start: 10px;
     text-align: center;
     font-size: 1.15vw;
+    color: wheat;
     }
 
 input[type=text], select, input[type=password], input[type=email] {
@@ -134,11 +142,11 @@ input[type=text], select, input[type=password], input[type=email] {
 
 /* Links */
 a:link {
-    color:blue;
+    color:yellow;
     }
     
 a:hover{
-    color: red;
+    color: rgb(255, 0, 43);
     }
 
 /* Register/Login links in header */
