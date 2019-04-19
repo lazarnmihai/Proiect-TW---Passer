@@ -31,11 +31,16 @@
 
   <div class="article">
       <div class="blockText">
-      <p><b>Add a new account.</b></p>
+      <p><h3>Add a new account.</h3></p>
       <p> Add a new account that you want to keep <b>safe</b> with Passwer.</p>
     </div>
       <div class="blockForm">
           <form>
+              <div class="row">
+                  <div class="col-25">
+                    <label>Title:</label><br></div>
+                  <div class="col-75">
+                    <input type="text" id="titleid" name="title" required placeholder="Give a title to this account.." size="35" autofocus><br></div></div>             
               <div class="row">
                  <div class="col-25">
                    <label>Username:</label><br></div>
@@ -45,7 +50,7 @@
                  <div class="col-25">
                     <label>Email:</label><br></div>
                  <div class="col-75">
-                    <input type="email" id="emailid" required placeholder="Adresa email" name="email" size="35" ><br></div></div>
+                    <input type="email" id="emailid" required placeholder="Email address" name="email" size="35" ><br></div></div>
               <div class="row">
                  <div class="col-25">
                     <label>Password:</label><br></div>
@@ -72,7 +77,7 @@
                     <label>Comment:</label><br></div>
                 <div class="col-75">
                     <input type="text" id="commentid" name="comment" placeholder="Add a Comment.." size="35" maxlength="120" ><br></div></div><br>
-              <input type="submit" value="Add New Account">
+              <input type="submit" value="Add New Account" class="accButton">
           </form>
           </div>
     </div>
