@@ -203,5 +203,12 @@ a:hover{
 }
   
   
-
+img{
+    border-radius: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    margin-top: 30px;
+}
 
