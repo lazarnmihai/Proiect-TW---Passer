@@ -212,3 +212,11 @@ img{
     margin-top: 30px;
 }
 
+/* Form password id message */
+
+#message{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.3vw;
+    font-weight: bold;
+
+}
