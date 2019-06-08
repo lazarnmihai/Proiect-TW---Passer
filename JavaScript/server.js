@@ -50,6 +50,15 @@ function goToFile(filePath, request, response){
 function goToPage(page, request, response){
     var filePath = "./home.html"
     switch (page) {
+        case "category":
+            filePath = "./category.html"
+            break;
+        case "recommendation":
+            filePath = "./recommendation.html"
+            break;
+        case "addNewAccount":
+            filePath = "./addNewAccount.html"
+            break;
         case "login":
             filePath = "./login.html"
             break;
@@ -79,13 +88,37 @@ function collectRequestData(request, callback) {
 }
  
 function handleRegister(request, response){
-    collectRequestData(request, (result) => {
-        console.log(result);
-       
-        mongoDbUtils.regiserUser(result.username, result.password, (_) => {
+    collectRequestData(request, (request_data) => {
+        console.log(request_data);
+        if (!request_data) {
             response.writeHead(200, { 'Content-Type': 'application/json' });
-            response.end(JSON.stringify(result));
-            response.end();
+            response.end(JSON.stringify(
+                {
+                    error_code:400,
+                    error_message:"no data received"
+                }
+            ))
+            return;
+        }
+       
+        mongoDbUtils.regiserUser(username=request_data.username, password=request_data.password, email=request_data.email, (mongo_response) => {
+            response.writeHead(200, { 'Content-Type': 'application/json' });
+            if (mongo_response && mongo_response.error_code){
+                response.end(JSON.stringify(
+                    {
+                        error_code:mongo_response.error_code,
+                        error_message:mongo_response.error_message
+                    }
+                ))
+            }
+            else{
+                response.end(JSON.stringify(
+                    {
+                        username:request_data.username,
+                        email:request_data.email
+                    }));
+                response.end();
+            }
         });
     });
 }
@@ -98,12 +131,24 @@ http.createServer(function (request, response) {
         filePath = './index.html';
     }
  
-    if (filePath.endsWith(".css") || filePath.endsWith(".jpg") || filePath.endsWith(".png")){
+    if (filePath.endsWith(".css") || filePath.endsWith(".jpg") || filePath.endsWith(".png")|| filePath.endsWith(".js")){
         console.log("loading file " + filePath);
         goToFile(filePath, request, response);
        
     }else{
         switch(request.url.toLowerCase()) {
+            case "/category":
+            case "/category.html":
+                goToPage("category", request, response);
+                break;
+            case "/recommendation":
+            case "/recommendation.html":
+                goToPage("recommendation", request, response);
+                break;
+            case "/addNewAccount":
+            case "/addNewAccount.html":
+                goToPage("addNewAccount", request, response);
+                break;
             case "/login":
             case "/login.html":
                 goToPage("login", request, response);
