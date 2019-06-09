@@ -11,19 +11,19 @@ $(document).ready(function () {
 
         request.done(function (jqXHR, textStatus, response) {
             if (!response.responseJSON.error_code) {
-                document.getElementById('message').style.color = 'rgb(41, 167, 41)';
-                document.getElementById('message').innerHTML = 'Successful login with username '
+                document.getElementById('messageLoggedIn').style.color = 'rgb(41, 167, 41)';
+                document.getElementById('messageLoggedIn').innerHTML = 'Successful login with username '
                     + response.responseJSON.username;
                 window.location.replace("/home.htmnl");
             } else {
-                document.getElementById('message').style.color = 'rgb(41, 167, 41)';
-                document.getElementById('message').innerHTML = response.responseJSON.error_message;
+                document.getElementById('messageLoggedIn').style.color = 'rgb(194, 0, 0)';
+                document.getElementById('messageLoggedIn').innerHTML = response.responseJSON.error_message;
             }
         })
 
         request.fail(function (jqXHR, textStatus, errorThrown) {
-            document.getElementById('message').style.color = 'rgb(41, 167, 41)';
-            document.getElementById('message').innerHTML = "Something failed. Please retry."
+            document.getElementById('messageLoggedIn').style.color = 'rgb(194, 0, 0)';
+            document.getElementById('messageLoggedIn').innerHTML = "Something failed. Please retry."
         })
         return false;
     })

@@ -1,16 +1,16 @@
 $(document).ready(function () {
-    $("#registerSubmitButton").click(function () {
+    $("#addAccountButton").click(function () {
         var serializedData = $("#registerForm").serialize();
 
         var request = $.ajax({
-            url: "register",
+            url: "addNewAccount",
             type: "post",
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             data: serializedData
         });
 
         request.done(function (jqXHR, textStatus, response) {
-            if (!response.responseJSON.error_code && validateUsername.valid && validateEmail.valid ) {
+            if (!response.responseJSON.error_code  ) {
                 document.getElementById('messageRegister').innerHTML = 'rgb(41, 167, 41)';
                 document.getElementById('messageRegister').innerHTML = 'Successful registration with username '
                     + response.responseJSON.username + " and email " + response.responseJSON.email + ".";
