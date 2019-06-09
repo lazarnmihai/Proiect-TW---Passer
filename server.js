@@ -235,6 +235,43 @@ function handleGetLoggedInUser(request, response) {
 
 }
 
+function handleAddNewAcc(request, response) {
+    collectRequestData(request, (request_data) => {
+        console.log("handleAddNewAcc " + JSON.stringify(request_data));
+        if (!request_data) {
+            response.writeHead(200, { 'Content-Type': 'application/json' });
+            response.end(JSON.stringify(
+                {
+                    error_code: 400,
+                    error_message: "no data received"
+                }
+            ))
+            return;
+        }
+
+        mongoDbUtils.addNewAccount(title = request_data.title, username=request_data.username, password = request_data.password,
+            email = request_data.email, category=request_data.country, comment=request_data.comment, (mongo_response) => {
+                response.writeHead(200, { 'Content-Type': 'application/json' });
+                if (mongo_response.error_code) {
+                    response.end(JSON.stringify(
+                        {
+                            error_code: mongo_response.error_code,
+                            error_message: mongo_response.error_message
+                        }
+                    ))
+                }
+                else {
+                    response.end(JSON.stringify(
+                        {
+                            username: request_data.username,
+                            email: request_data.email
+                        }));
+                    response.end();
+                }
+            });
+    });
+}
+
 
 http.createServer(function (request, response) {
     console.log('request ', request.url);
@@ -268,8 +305,11 @@ http.createServer(function (request, response) {
                 break;
             case "/addnewaccount":
             case "/addnewaccount.html":
-                goToPage("addnewaccount", request, response);
-                break;
+                if (request.method === "GET") {
+                    goToPage("addnewaccount", request, response);
+                } else if (request.method === "POST") {
+                    handleAddNewAcc(request, response);
+                }                break;
             case "/login":
             case "/login.html":
                 if (request.method === "GET") {
