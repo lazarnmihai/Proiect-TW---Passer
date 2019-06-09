@@ -1,77 +1,82 @@
 <!DOCTYPE HTML>
 <html>
 
-  <head>
-    <meta charset="utf-8">
-    <title>&#9993 Passer</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<head>
+    <link rel="import" href="headerTemplate.html">
     <script type="text/javascript" src="../js/register.js"></script>
     <script type="text/javascript" src="../js/validations.js"></script>
-
-  </head>
+</head>
 
 <body>
-  <div class="header">
-      <p id="regLogHeader">
-        <a href="register.html">Register</a> | <a href="login.html">Login</a>
-      </p>
-      <p>
-        <h1><a id="pageName" href="home.html">Passer - Password Manager</a></h1>
-      </p>
-  </div>
- 
-  <div class="nav-menu">
-      <a href="home.html">Home</a>
-      <a href="recommendation.html">Why to use Passer</a>
-      <a href="addNewAccount.html" >Add New Account</a>
-      <a href="category.html">Category</a>
-      <a href="register.html" class="active">Register</a>
-      <a href="login.html">Login</a>
-  </div>
-  
-  <div class="article">
-      <div class="blockText">
-         <p>Create your new account. If you already have an account you can <a id="linkColor" href="login.html" >Login.</a></p><br><br>
-      </div>
-     <div class="blockForm" >
-        <form id="registerForm">
-            <div class="row">
-                <div class="col-25">
-                    <label>Username:</label><br></div>
-                <div class="col-75">
-                    <input type="text" id="usernameid" name="username" required placeholder="Username"   size="35" autofocus onfocusout='validateUsername()'><br></div></div>
-            <div class="row">
-                <div class="col-25">
-                    <label>Email:</label><br></div>
-                <div class="col-75">
-                    <input type="email" id="emailid" required placeholder="Adresa email" name="email" oninput='validateEmail()' size="35" ><br></div></div>
-            <div class="row">
-                <div class="col-25">
-                    <label>Password:</label><br></div>
-                <div class="col-75">
-                    <input type="password" id="passwordid" name="password" required placeholder="Password" onkeyup='validatePassword()'  size="35"><br></div></div>
-            <div class="row">
-                <div class="col-25">
-                    <label>Repeat password:</label><br></div>
-                <div class="col-75">
-                    <input type="password" id="confirmPasswordid" name="repeatedpassword" required placeholder="Repeat password" onkeyup='validatePassword()'  size="35"><br>
-                    <span id='message'></span>
-                    <br></div></div><br><br>           
-             <input type="submit" value="Register" class="accButton" id="registerSubmitButton" >              
-        </form>
-        <div id="registerResultMessage">SuccessMessage should appear here</div>
-        <div id="registerFail">Fail message should appear here</div>
-     </div>
- </div>
 
-  <div class="footer">
-      <h6>
-        <b>Proiect TW<br> Lazar Mihai  & Condurache Vlad</b>
-      </h6>
-  </div>
+    <div class="header">
+        <p id="regLogHeader">
+            <a href="register.html">Register</a> | <a href="login.html">Login</a>
+        </p>
+        <p>
+            <h1><a id="pageName" href="home.html">Passer - Password Manager</a></h1>
+        </p>
+    </div>
+
+    <div class="nav-menu">
+        <a href="home.html">Home</a>
+        <a href="recommendation.html">Why to use Passer</a>
+        <a href="addNewAccount.html">Add New Account</a>
+        <a href="category.html">Category</a>
+        <a href="register.html" class="active">Register</a>
+        <a href="login.html">Login</a>
+    </div>
+
+    <div class="article">
+        <div class="blockText">
+            <p>Create your new account. If you already have an account you can <a id="linkColor"
+                    href="login.html">Login.</a></p><br><br>
+        </div>
+        <div class="blockForm">
+            <form id="registerForm">
+                <div class="row">
+                    <div class="col-25">
+                        <label>Username:</label><br></div>
+                    <div class="col-75">
+                        <input type="text" id="usernameid" name="username" required placeholder="Username" size="35"
+                            autofocus onfocusout='validateUsername()'><br></div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label>Email:</label><br></div>
+                    <div class="col-75">
+                        <input type="email" id="emailid" required placeholder="Adresa email" name="email"
+                            oninput='validateEmail()' size="35"><br></div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label>Password:</label><br></div>
+                    <div class="col-75">
+                        <input type="password" id="passwordid" name="password" required placeholder="Password"
+                            onkeyup='validatePassword()' size="35"><br></div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label>Repeat password:</label><br></div>
+                    <div class="col-75">
+                        <input type="password" id="confirmPasswordid" name="repeatedpassword" required
+                            placeholder="Repeat password" onkeyup='validatePassword()' size="35"><br>
+                        <span id='message'></span>
+                        <br></div>
+                </div><br><br>
+                <input type="submit" value="Register" class="accButton" id="registerSubmitButton">
+            </form>
+            <div id="registerResultMessage">SuccessMessage should appear here</div>
+            <div id="registerFail">Fail message should appear here</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h6>
+            <b>Proiect TW<br> Lazar Mihai & Condurache Vlad</b>
+        </h6>
+    </div>
 
 </body>
+
 </html>
