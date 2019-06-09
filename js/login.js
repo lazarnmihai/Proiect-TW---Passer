@@ -14,6 +14,7 @@ $(document).ready(function () {
                 document.getElementById('message').style.color = 'rgb(41, 167, 41)';
                 document.getElementById('message').innerHTML = 'Successful login with username '
                     + response.responseJSON.username;
+                window.location.replace("/home.htmnl");
             } else {
                 document.getElementById('message').style.color = 'rgb(41, 167, 41)';
                 document.getElementById('message').innerHTML = response.responseJSON.error_message;
