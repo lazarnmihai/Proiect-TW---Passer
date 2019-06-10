@@ -132,4 +132,33 @@ module.exports = {
         })
     },
 
+
+    regiserAddNewAcc: function (title, username, password, email, category, comment, callback) {
+        module.exports.connectToDB(DB_NAME, COLLECTION_ACCOUNTS, (collection) => {
+            collection.insertOne(
+                {
+                    title: title,
+                    username: username,
+                    passwordInClear: password,
+                    passwordAlg1: module.exports.sha256(password),
+                    email: email,
+                    category: category,
+                    comment: comment
+                },
+                (err, result) => {
+                    if (err) console.log(err);
+                    if (err && err.code == 11000) {
+                        callback({
+                            error_code: 409,
+                            error_message: "Account already exists"
+                        });
+                    } else {
+                        console.log("From mongo:");
+                        console.log(result);
+                        callback(result);
+                    }
+                })
+        })
+    },
+
 };

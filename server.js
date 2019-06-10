@@ -250,7 +250,7 @@ function handleAddNewAcc(request, response) {
         }
 
         mongoDbUtils.addNewAccount(title = request_data.title, username=request_data.username, password = request_data.password,
-            email = request_data.email, category=request_data.country, comment=request_data.comment, (mongo_response) => {
+            email = request_data.email, category=request_data.category, comment=request_data.comment, (mongo_response) => {
                 response.writeHead(200, { 'Content-Type': 'application/json' });
                 if (mongo_response.error_code) {
                     response.end(JSON.stringify(
