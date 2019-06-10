@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $("#addAccountButton").click(function () {
-        var serializedData = $("#registerForm").serialize();
+        var serializedData = $("#addNewAccForm").serialize();
 
         var request = $.ajax({
             url: "addNewAccount",
@@ -12,8 +12,8 @@ $(document).ready(function () {
         request.done(function (jqXHR, textStatus, response) {
             if (!response.responseJSON.error_code  ) {
                 document.getElementById('messageRegister').innerHTML = 'rgb(41, 167, 41)';
-                document.getElementById('messageRegister').innerHTML = 'Successful registration with username '
-                    + response.responseJSON.username + " and email " + response.responseJSON.email + ".";
+                document.getElementById('messageRegister').innerHTML = 'Successful registration with '
+                    + response.responseJSON.title ;
             } else {
                 document.getElementById('messageRegister').style.color = 'rgb(194, 0, 0)';
                 document.getElementById('messageRegister').innerHTML = "Complete all the fields!";
