@@ -10,22 +10,22 @@ $(document).ready(function () {
         });
 
         request.done(function (jqXHR, textStatus, response) {
-            if (!response.responseJSON.error_code  ) {
-                document.getElementById('messageRegister').innerHTML = 'rgb(41, 167, 41)';
-                document.getElementById('messageRegister').innerHTML = 'Successful registration with '
+            if (!response.responseJSON.error_code && validateLoginBtn && validateTitle.valid ) {
+                document.getElementById('messageAddNewAcc').innerHTML = 'rgb(41, 167, 41)';
+                document.getElementById('messageAddNewAcc').innerHTML = 'Successful registration with: ' +"<br>"
                     + response.responseJSON.title ;
             } else {
-                document.getElementById('messageRegister').style.color = 'rgb(194, 0, 0)';
-                document.getElementById('messageRegister').innerHTML = "Complete all the fields!";
+                document.getElementById('messageAddNewAcc').style.color = 'rgb(194, 0, 0)';
+                document.getElementById('messageAddNewAcc').innerHTML = "Complete all the fields!";
             }
             //$("#registerResultMessage").text(response.responseJSON.responseText);
         })
 
-        request.fail(function (jqXHR, textStatus, errorThrown) {
+        if(request.fail(function (jqXHR, textStatus, errorThrown) {
             document.getElementById('message').style.color = 'rgb(194, 0, 0)';
             document.getElementById('message').innerHTML = "Something failed. Please retry."
-            $("#registerFail").text(errorThrown);
-        })
-        return false;
+        })){
+                 return false;
+        }
     })
 })
