@@ -1,58 +1,122 @@
 <!DOCTYPE HTML>
 <html>
 
-  <head>
-    <link rel="import" href="headerTemplate.html">
+<head>
+  <link rel="import" href="headerTemplate.html">
+  <script type="text/javascript" src="../js/category.js"></script>
+  <script type="text/javascript" src="../js/validations.js"></script>
 
-
-  </head>
+</head>
 
 <body>
-    <div class="header">
-        <p id="regLogHeader">
-          <a href="register.html">Register</a> | <a href="login.html">Login</a>
-        </p>
-        <p>
-          <h1><a id="pageName" href="home.html">Passer - Password Manager</a></h1>
-        </p>
-    </div>
-  
-    <div class="nav-menu">
-        <a href="home.html">Home</a>
-        <a href="recommendation.html">Why to use Passer</a>
-        <a href="addNewAccount.html" >Add New Account</a>
-        <a href="category.html" class="active">Category</a>
-        <a href="register.html">Register</a>
-        <a href="login.html">Login</a>
-    </div>
-  
-    <div class="article" >
-      <p><h3>Your accounts:</h3></p>
-      <ol type="1" class="ol">
-        <li>FaceBook: </li>
-           <ul>
-             <li class="li"><a href="fbPage.html">First account</a></li>
-             <li>second account</li>
-           </ul>
-        <li>Instagram</li>
-           <ul>
-             <li>first account</li>
-             <li>second account</li>
-           </ul>
-        <li>Gmail: </li>
-            <ul>
-              <li>first account</li>
-            </ul>
-      </ol>
-    </div>
-    
+  <div class="header">
+    <p id="regLogHeader">
+      <a href="register.html">Register</a> | <a href="login.html">Login</a>
+    </p>
+    <p>
+      <h1><a id="pageName" href="home.html">Passer - Password Manager</a></h1>
+    </p>
+  </div>
 
-    
-    <div class="footer">
-      <h6>
-        <b>Proiect TW<br> Lazar Mihai  & Condurache Vlad</b>
-      </h6>
+  <div class="nav-menu">
+    <a href="home.html">Home</a>
+    <a href="recommendation.html">Why to use Passer</a>
+    <a href="addNewAccount.html">Add New Account</a>
+    <a href="category.html" class="active">Category</a>
+    <a href="register.html">Register</a>
+    <a href="login.html">Login</a>
+  </div>
+
+  <div id="divCategories">
+
+    <div class="article">
+        <select id="showAllCategory" name="category"  onchange="loadAccountsOnCategoryChange()">
+            <option value="category">Category</option>
+            <option value="username">Username</option>
+            <option value="email">Email</option>
+            <option value="comment">Comment</option>
+          </select><br>
+      <p>
+        <h3>Your accounts:</h3>
+      </p>
+      <div id="divAllAccounts">
+
+      </div>
     </div>
+
+
+  </div>
+  <div class="ghost" id="divUpdateForm">
+    <div class="blockForm">
+      <form id="updateAccForm">
+        <div class="row">
+          <div class="col-25">
+            <label>Title:</label><br></div>
+          <div class="col-75">
+            <input type="text" id="titleid" name="title" size="35" readonly><br></div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label>Username:</label><br></div>
+          <div class="col-75">
+            <input type="text" id="usernameid" name="username" required placeholder="Username"
+              onfocusout="validateUsername()" oninput="validateUsername()" size="35"><br></div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label>Email:</label><br></div>
+          <div class="col-75">
+            <input type="email" id="emailid" required placeholder="Email address" name="email" oninput='validateEmail()'
+              onfocusout='validateEmail()' size="35"><br></div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label>Category:</label><br></div>
+          <div class="col-75">
+              <input type="text" id="categoryid" name="category" size="35" readonly><br></div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label>Comment:</label><br></div>
+          <div class="col-75">
+            <input type="text" id="commentid" name="comment" placeholder="Add a Comment.." size="35" maxlength="120">
+            <br></div>
+        </div><br>
+        <input type="submit" value="Update Account" class="accButton" id="updateAccountButton">
+      </form>
+      <br>
+      <input type="submit" value="Back" class="accButton" onclick="showAllCategories()">
+    </div>
+  </div>
+  <div class="ghost" id="divChangePassword">
+    <div class="blockForm">
+      <form id="changePasswordForm">
+        <div class="row">
+          <div class="col-25">
+            <label>Password:</label><br></div>
+          <div class="col-75">
+            <input type="password" id="passwordid" name="password" required placeholder="Password"
+              onkeyup='validatePassword()' onfocusout='validatePassword()' size="35"><br></div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label>Repeat password:</label><br></div>
+          <div class="col-75">
+            <input type="password" id="confirmPasswordid" name="repeatedpassword" required placeholder="Repeat password"
+              onkeyup='validatePassword()' onfocusout='validatePassword()' size="35"><br></div>
+        </div>
+        <input type="submit" value="Change Password" class="accButton" id="changePassowordButton">
+      </form>
+      <br>
+      <input type="submit" value="Back" class="accButton" onclick="showAllCategories()">
+    </div>
+  </div>
+  <div class="footer">
+    <h6>
+      <b>Proiect TW<br> Lazar Mihai & Condurache Vlad</b>
+    </h6>
+  </div>
 
 </body>
+
 </html>
