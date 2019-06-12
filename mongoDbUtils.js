@@ -133,10 +133,11 @@ module.exports = {
     },
 
 
-    regiserAddNewAcc: function (title, username, password, email, category, comment, callback) {
+    addNewAccount: function (local_user, title, username, password, email, category, comment, callback) {
         module.exports.connectToDB(DB_NAME, COLLECTION_ACCOUNTS, (collection) => {
             collection.insertOne(
                 {
+                    local_user:local_user, 
                     title: title,
                     username: username,
                     passwordInClear: password,
@@ -160,5 +161,4 @@ module.exports = {
                 })
         })
     },
-
 };

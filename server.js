@@ -188,6 +188,31 @@ function handleLogin(request, response) {
     });
 }
 
+function getSessionIdFromRequest(request) {
+    var cookies = new Cookies(request)
+    var uuid = cookies.get('login');
+    return uuid
+}
+
+function getUserFromSession(request, callback) {
+    var uuid = getSessionIdFromRequest(request);
+    mongoDbUtils.getSession(uuid, (mongo_response) => {
+        if (!mongo_response) {
+            callback(null);
+            return;
+        }
+
+        mongoDbUtils.getUser(mongo_response.username, (mongo_response) => {
+            if (!mongo_response) {
+                callback(null);
+                return;
+            }
+            callback(mongo_response.username)
+            return
+        })
+    })
+}
+
 function handleGetLoggedInUser(request, response) {
     console.log("handleGetLoggedInUser")
     var cookies = new Cookies(request, response)
@@ -204,7 +229,7 @@ function handleGetLoggedInUser(request, response) {
 
     mongoDbUtils.getSession(uuid, (mongo_response) => {
         if (!mongo_response) {
-            cookies.set('login', {expires: Date.now()});
+            cookies.set('login', { expires: Date.now() });
             response.writeHead(200, { 'Content-Type': 'application/json' });
             response.end(JSON.stringify(
                 {
@@ -217,7 +242,7 @@ function handleGetLoggedInUser(request, response) {
 
         mongoDbUtils.getUser(mongo_response.username, (mongo_response) => {
             if (!mongo_response) {
-                cookies.set('login', {expires: Date.now()});
+                cookies.set('login', { expires: Date.now() });
                 response.writeHead(200, { 'Content-Type': 'application/json' });
                 response.end(JSON.stringify(
                     {
@@ -238,7 +263,7 @@ function handleGetLoggedInUser(request, response) {
 
 }
 
-function handleAddNewAcc(request, response) {
+function handleAddNewAccount(request, response) {
     collectRequestData(request, (request_data) => {
         console.log("handleAddNewAcc " + JSON.stringify(request_data));
         if (!request_data) {
@@ -252,52 +277,65 @@ function handleAddNewAcc(request, response) {
             return;
         }
 
-        mongoDbUtils.addNewAccount(title = request_data.title, username=request_data.username, password = request_data.password,
-            email = request_data.email, category=request_data.category, comment=request_data.comment, (mongo_response) => {
+        getUserFromSession(request, (username) => {
+            if (!username) {
                 response.writeHead(200, { 'Content-Type': 'application/json' });
-                if (mongo_response.error_code) {
-                    response.end(JSON.stringify(
-                        {
-                            error_code: mongo_response.error_code,
-                            error_message: mongo_response.error_message
-                        }
-                    ))
-                }
-                else {
-                    response.end(JSON.stringify(
-                        {
-                            username: request_data.username,
-                            email: request_data.email
-                        }));
-                    response.end();
-                }
-            });
+                response.end(JSON.stringify(
+                    {
+                        error_code: 403,
+                        error_message: "User not logged in"
+                    }));
+                response.end();
+                return;
+            }
+            mongoDbUtils.addNewAccount(local_user = username, title = request_data.title, username = request_data.username,
+                password = request_data.password, email = request_data.email, category = request_data.category,
+                comment = request_data.comment, (mongo_response) => {
+                    response.writeHead(200, { 'Content-Type': 'application/json' });
+                    if (mongo_response.error_code) {
+                        response.end(JSON.stringify(
+                            {
+                                error_code: mongo_response.error_code,
+                                error_message: mongo_response.error_message
+                            }
+                        ))
+                    }
+                    else {
+                        response.end(JSON.stringify(
+                            {
+                                title: request_data.title
+                            }));
+                        response.end();
+                    }
+                });
+        })
     });
 }
 
-
-http.createServer(function (request, response) {
-    console.log('request ', request.url);
-    var cookies = new Cookies(request, response)
-    var lastVisit = cookies.get('LastVisit')
-    cookies.set('LastVisit', new Date().toISOString())
-    if (!lastVisit) {
-        console.log('Welcome, first time visitor!')
-    } else {
-        console.log('Welcome back! Nothing much changed since your last visit at ' + lastVisit + '.')
-    }
-
-    var filePath = '.' + request.url;
-    // if (filePath == './') {
-    //     filePath = './pages/index.html';
-    // }
-
-    if (filePath.endsWith(".css") || filePath.endsWith(".jpg") || filePath.endsWith(".png") || filePath.endsWith(".js")) {
-        console.log("loading file " + filePath);
-        goToFile(filePath, request, response);
-
-    } else {
-        switch (request.url.toLowerCase()) {
+function handleCall(request, response) {
+    getUserFromSession(request, (username) => {
+        var loggedIn = false;
+        if (username) {
+            loggedIn = true;
+        }
+        var urlLowerCase = request.url.toLowerCase();
+        if (!loggedIn){
+            switch (urlLowerCase) {
+                case "/recommendation":
+                case "/recommendation.html":
+                case "/login":
+                case "/login.html":
+                case "/register":
+                case "/register.html":
+                case "/headertemplate.html":
+                case "/getloggedinuser":
+                    break;
+                default:
+                    urlLowerCase = "home";
+            }
+        }
+        
+        switch (urlLowerCase) {
             case "/fbpage":
             case "/fbpage.html":
                 goToPage("fbpage", request, response);
@@ -315,8 +353,9 @@ http.createServer(function (request, response) {
                 if (request.method === "GET") {
                     goToPage("addnewaccount", request, response);
                 } else if (request.method === "POST") {
-                    handleAddNewAcc(request, response);
-                }                break;
+                    handleAddNewAccount(request, response);
+                }
+                break;
             case "/login":
             case "/login.html":
                 if (request.method === "GET") {
@@ -324,13 +363,6 @@ http.createServer(function (request, response) {
                 } else if (request.method === "POST") {
                     handleLogin(request, response);
                 }
-                break;
-            case "/mongo":
-                mongoDbUtils.getUser("ion", (user) => {
-                    response.writeHead(200, { 'Content-Type': 'application/json' });
-                    response.end(JSON.stringify(user));
-                    response.end();
-                });
                 break;
             case "/register":
             case "/register.html":
@@ -349,9 +381,58 @@ http.createServer(function (request, response) {
             default:
                 goToPage("home", request, response);
         }
-    }
+    });
+}
 
-   
+http.createServer(function (request, response) {
+    process.on('uncaughtException', function (err) {
+        console.log('Caught exception: ' + err);
+    });
+    try {
+        console.log('request ', request.url);
+        var cookies = new Cookies(request, response)
+        var lastVisit = cookies.get('LastVisit')
+        cookies.set('LastVisit', new Date().toISOString())
+        if (!lastVisit) {
+            console.log('Welcome, first time visitor!')
+        } else {
+            console.log('Welcome back! Nothing much changed since your last visit at ' + lastVisit + '.')
+        }
+
+        var filePath = '.' + request.url;
+        // if (filePath == './') {
+        //     filePath = './pages/index.html';
+        // }
+
+        if (filePath.endsWith(".css") || filePath.endsWith(".jpg") || filePath.endsWith(".png") || filePath.endsWith(".js")) {
+            console.log("loading file " + filePath);
+            goToFile(filePath, request, response);
+
+        } else {
+            handleCall(request, response)
+        }
+    } catch (e) {
+        console.log("Encountered an error " + e)
+        try {
+            response.writeHead(500);
+            response.end();
+        } catch (e) {
+            console.log("Encountered an error while sending 500 " + e)
+        }
+    }
 
 }).listen(8125);
 console.log('Server running at http://127.0.0.1:8125/');
+/*
+use Passer2
+db.createCollection("user");
+db.user.createIndex({"username":1},{"unique":true})
+db.user.createIndex({"email":1},{"unique":true})
+
+db.createCollection("session");
+db.session.createIndex({"username":1},{"unique":true})
+
+db.createCollection("account");
+db.account.createIndex({"username":1, "title":1, "category":1},{"unique":true})
+
+*/
