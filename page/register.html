@@ -29,8 +29,10 @@
 
     <div class="article">
         <div class="blockText">
-            <p>Create your new account. If you already have an account you can <a id="linkColor"
-                    href="login.html">Login.</a></p><br><br>
+            <p>Create your new account. If you already have an account you can <a id="linkColor" href="login.html">Login.</a>
+            </p>
+            <br><br>
+            <samp id="messageRegister"></samp>
         </div>
         <div class="blockForm">
             <form id="registerForm">
@@ -60,14 +62,14 @@
                         <label>Repeat password:</label><br></div>
                     <div class="col-75">
                         <input type="password" id="confirmPasswordid" name="repeatedpassword" required
-                            placeholder="Repeat password" onkeyup='validatePassword()' size="35"><br>
+                            placeholder="Repeat password" onkeyup='validatePassword()' size="35"><br><br>
                         <span id='message'></span>
                         <br></div>
                 </div><br><br>
                 <input type="submit" value="Register" class="accButton" id="registerSubmitButton">
             </form>
-            <div id="registerResultMessage">SuccessMessage should appear here</div>
-            <div id="registerFail">Fail message should appear here</div>
+            <!-- <div id="registerResultMessage">SuccessMessage should appear here</div>
+            <div id="registerFail">Fail message should appear here</div> -->
         </div>
     </div>
 

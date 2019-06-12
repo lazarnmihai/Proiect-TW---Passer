@@ -3,6 +3,8 @@
 
   <head>
     <link rel="import" href="headerTemplate.html">
+    <script type="text/javascript" src="../js/addNewAccount.js"></script>
+    <script type="text/javascript" src="../js/validations.js"></script>
 
   </head>
 
@@ -29,6 +31,11 @@
       <div class="blockText">
       <p><h3>Add a new account.</h3></p>
       <p> Add a new account that you want to keep <b>safe</b> with Passwer.</p>
+      <br><br>
+      <samp id="messageAddNewAcc"></samp>
+      <span id='message'></span>
+
+
     </div>
       <div class="blockForm">
           <form id="addNewAccForm">
@@ -36,32 +43,37 @@
                   <div class="col-25">
                     <label>Title:</label><br></div>
                   <div class="col-75">
-                    <input type="text" id="titleid" name="title" required placeholder="Give a title to this account.." size="35" autofocus><br></div></div>             
+                    <input type="text" id="titleid" name="title" required placeholder="Give a title to this account.." size="35"
+                     autofocus onfocusout='validateTitle()'><br></div></div>             
               <div class="row">
                  <div class="col-25">
                    <label>Username:</label><br></div>
                  <div class="col-75">
-                   <input type="text" id="usernameid" name="username" required placeholder="Username" size="35" autofocus><br></div></div>
+                   <input type="text" id="usernameid" name="username" required placeholder="Username" onfocusout="validateUsername()" 
+                   oninput="validateUsername()" size="35" ><br></div></div>
               <div class="row">
                  <div class="col-25">
                     <label>Email:</label><br></div>
                  <div class="col-75">
-                    <input type="email" id="emailid" required placeholder="Email address" name="email" size="35" ><br></div></div>
+                    <input type="email" id="emailid" required placeholder="Email address" name="email" oninput='validateEmail()'
+                     onfocusout='validateEmail()' size="35" ><br></div></div>
               <div class="row">
                  <div class="col-25">
                     <label>Password:</label><br></div>
                  <div class="col-75">
-                    <input type="password" id="passwordid" name="password" required placeholder="Password" size="35"><br></div></div>
+                    <input type="password" id="passwordid" name="password" required placeholder="Password" onkeyup='validatePassword()' 
+                     onfocusout ='validatePassword()' size="35"><br></div></div>
               <div class="row">
                  <div class="col-25">
                     <label>Repeat password:</label><br></div>
                  <div class="col-75">
-                    <input type="password" id="repeatedpasswordid" name="repeatedpassword" required placeholder="Repeat password" size="35"><br></div></div>
+                    <input type="password" id="confirmPasswordid" name="repeatedpassword" required placeholder="Repeat password" 
+                    onkeyup='validatePassword()' onfocusout ='validatePassword()' size="35"><br></div></div>
               <div class="row">
                  <div class="col-25">
                     <label>Category:</label><br></div>
                  <div class="col-75">
-                    <select id="category" name="category" >
+                    <select id="category" name="category" class="required"  onclick="validateCategory()">
                         <option value="" disabled selected>Select your option</option>
                         <option value="facebook" >FaceBook</option>
                         <option value="Instagram">Instagram</option>
@@ -72,7 +84,8 @@
                 <div class="col-25">
                     <label>Comment:</label><br></div>
                 <div class="col-75">
-                    <input type="text" id="commentid" name="comment" placeholder="Add a Comment.." size="35" maxlength="120" ><br></div></div><br>
+                    <input type="text" id="commentid" name="comment" placeholder="Add a Comment.." size="35" maxlength="120" >
+                    <br></div></div><br>
               <input type="submit" value="Add New Account" class="accButton" id="addAccountButton">
           </form>
           </div>
