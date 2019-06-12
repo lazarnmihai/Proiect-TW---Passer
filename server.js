@@ -557,16 +557,4 @@ http.createServer(function (request, response) {
 
 }).listen(8125);
 console.log('Server running at http://127.0.0.1:8125/');
-/*
-use Passer2
-db.createCollection("user");
-db.user.createIndex({"username":1},{"unique":true})
-db.user.createIndex({"email":1},{"unique":true})
 
-db.createCollection("session");
-db.session.createIndex({"username":1},{"unique":true})
-
-db.createCollection("account");
-db.account.createIndex({"local_user":1, "title":1, "category":1},{"unique":true})
-
-*/
