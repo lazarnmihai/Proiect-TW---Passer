@@ -10,10 +10,10 @@ $(document).ready(function () {
         });
 
         request.done(function (jqXHR, textStatus, response) {
-            if (!response.responseJSON.error_code && validateUsername.valid && validateEmail.valid ) {
+            if (!response.responseJSON.error_code && validateLoginBtn ) {
                 document.getElementById('messageRegister').innerHTML = 'rgb(41, 167, 41)';
-                document.getElementById('messageRegister').innerHTML = 'Successful registration with username '
-                    + response.responseJSON.username + " and email " + response.responseJSON.email + ".";
+                document.getElementById('messageRegister').innerHTML = "Successful registration with: " + "<br>" + "Username: "
+                    + response.responseJSON.username + "<br>"+"Email: " + response.responseJSON.email ;
             } else {
                 document.getElementById('messageRegister').style.color = 'rgb(194, 0, 0)';
                 document.getElementById('messageRegister').innerHTML = "Complete all the fields!";
@@ -24,7 +24,7 @@ $(document).ready(function () {
         request.fail(function (jqXHR, textStatus, errorThrown) {
             document.getElementById('message').style.color = 'rgb(194, 0, 0)';
             document.getElementById('message').innerHTML = "Something failed. Please retry."
-            $("#registerFail").text(errorThrown);
+            //$("#registerFail").text(errorThrown);
         })
         return false;
     })
