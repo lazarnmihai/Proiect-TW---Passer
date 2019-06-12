@@ -2,14 +2,11 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <title>&#9993 Passer</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <link rel="import" href="headerTemplate.html">
   <script type="text/javascript" src="../js/login.js"></script>
   <script type="text/javascript" src="../js/validations.js"></script>
+  <script type="text/javascript" src="../js/logout.js"></script>
+
 
 </head>
 
@@ -36,6 +33,9 @@
     <div class="blockText">
       <p>Connect to your account. Don't have an account? <a id="linkColor" href="register.html">Register</a> here.</p>
       <br><br>
+      <samp id="messageLoggedIn"></samp>
+      <samp id="messageLogout"></samp>
+
     </div>
     <br>
     <div class="blockForm">
@@ -51,11 +51,13 @@
           <div class="col-25">
             <label>Password:</label><br></div>
           <div class="col-75">
-            <input type="password" id="passwordid" name="password" required placeholder="Password" size="35"><span
-              id='message'></span>
-            <br></div>
-        </div><br><br>
-        <input type="submit" value="Login" id="loginSubmitButton" class="accButton">
+            <input type="password" id="passwordid" name="password" required placeholder="Password" size="35"><br>
+            <br></div><br><br><br>
+            <span id='message'></span>
+        </div><br>
+        <input type="submit" value="Login" id="loginSubmitButton" class="accButton"  >
+        <input type="submit" value="Logout" id="logoutSubmitButton" class="accButton" onclick="disableLoginBtn()" onclick="activBtn()" disabled>
+
       </form>
     </div>
   </div>
