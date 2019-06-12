@@ -126,7 +126,7 @@ module.exports = {
         module.exports.connectToDB(DB_NAME, COLLECTION_SESSIONS, (collection) => {
             collection.findOne({ uuid: uuid }, (err, result) => {
                 if (err) console.log(err);
-                console.log("From mongo:" + JSON.stringify(result));
+                console.log("From mongo getSession:" + JSON.stringify(result));
                 callback(result);
             })
         })
@@ -137,7 +137,7 @@ module.exports = {
         module.exports.connectToDB(DB_NAME, COLLECTION_ACCOUNTS, (collection) => {
             collection.insertOne(
                 {
-                    local_user:local_user, 
+                    local_user: local_user,
                     title: title,
                     username: username,
                     passwordInClear: password,
@@ -154,7 +154,128 @@ module.exports = {
                             error_message: "Account already exists"
                         });
                     } else {
-                        console.log("From mongo:");
+                        console.log("From mongo addNewAccount:");
+                        console.log(result);
+                        callback(result);
+                    }
+                })
+        })
+    },
+
+    getAccounts: function (local_user, callback) {
+        module.exports.connectToDB(DB_NAME, COLLECTION_ACCOUNTS, (collection) => {
+            collection.find(
+                { local_user: local_user },
+                {
+                    projection: {
+                        title: 1,
+                        username: 1,
+                        email: 1,
+                        category: 1,
+                        comment: 1
+                    }
+                }
+            ).toArray(function (err, result) {
+                if (err) console.log(err);
+                console.log("From mongo getAccounts:");
+                console.log(result);
+                callback(result);
+            });
+        })
+    },
+
+    getAccount: function (local_user, title, category, callback) {
+        console.log("getAccount " + local_user + " " + title + " " + category)
+        module.exports.connectToDB(DB_NAME, COLLECTION_ACCOUNTS, (collection) => {
+            collection.findOne(
+                {
+                    local_user: local_user,
+                    title: title,
+                    category: category
+                },
+                {
+                    projection: {
+                        title: 1,
+                        username: 1,
+                        email: 1,
+                        category: 1,
+                        comment: 1
+                    }
+                }, (err, result) => {
+                    if (err) console.log(err);
+                    console.log("From mongo getAccount:" + JSON.stringify(result));
+                    callback(result);
+                })
+        })
+    },
+
+    getPassword: function (local_user, title, category, callback) {
+        module.exports.connectToDB(DB_NAME, COLLECTION_ACCOUNTS, (collection) => {
+            collection.findOne(
+                {
+                    local_user: local_user,
+                    title: title,
+                    category: category
+                },
+                {
+                    projection: {
+                        passwordInClear: 1,
+                        passwordAlg1: 1,
+                    }
+                }, (err, result) => {
+                    if (err) console.log(err);
+                    console.log("From mongo getPassword:" + JSON.stringify(result));
+                    callback(result);
+                })
+        })
+    },
+
+    updatePassword: function (local_user, title, category, password, callback) {
+        module.exports.connectToDB(DB_NAME, COLLECTION_ACCOUNTS, (collection) => {
+            collection.updateOne(
+                {
+                    local_user: local_user,
+                    title: title,
+                    category: category
+                },
+                {
+                    $set: {
+                        passwordInClear: password,
+                        passwordAlg1: module.exports.sha256(password),
+                    }
+                }, (err, result) => {
+                    if (err) console.log(err);
+                    console.log("From mongo updatePassword:" + JSON.stringify(result));
+                    callback(result);
+                })
+        })
+    },
+
+    updateAccount: function (local_user, title, category, username, email, comment, callback) {
+        console.log("updateAccount " + local_user + " " + title + " " + category + " " + username + " " + email  + " " + comment);
+        module.exports.connectToDB(DB_NAME, COLLECTION_ACCOUNTS, (collection) => {
+            collection.updateOne(
+                {
+                    local_user: local_user,
+                    title: title,
+                    category: category
+                },
+                {
+                    $set: {
+                        username: username,
+                        email: email,
+                        comment: comment
+                    }
+                },
+                (err, result) => {
+                    if (err) console.log(err);
+                    if (err && err.code == 11000) {
+                        callback({
+                            error_code: 409,
+                            error_message: "Account already exists"
+                        });
+                    } else {
+                        console.log("From mongo updateAccount:");
                         console.log(result);
                         callback(result);
                     }

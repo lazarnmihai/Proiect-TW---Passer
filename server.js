@@ -312,6 +312,129 @@ function handleAddNewAccount(request, response) {
     });
 }
 
+function handleGetAccounts(request, response) {
+    console.log("handleGetAccounts ");
+
+
+    getUserFromSession(request, (username) => {
+        if (!username) {
+            response.writeHead(200, { 'Content-Type': 'application/json' });
+            response.end(JSON.stringify(
+                {
+                    error_code: 403,
+                    error_message: "User not logged in"
+                }));
+            response.end();
+            return;
+        }
+        mongoDbUtils.getAccounts(local_user = username, (mongo_response) => {
+            response.writeHead(200, { 'Content-Type': 'application/json' });
+            if (mongo_response.error_code) {
+                response.end(JSON.stringify(
+                    {
+                        error_code: mongo_response.error_code,
+                        error_message: mongo_response.error_message
+                    }
+                ))
+            }
+            else {
+                response.end(JSON.stringify(mongo_response));
+                response.end();
+            }
+        });
+    })
+}
+
+function handleGetAccount(request, response) {
+    collectRequestData(request, (request_data) => {
+        console.log("handleGetAccount " + JSON.stringify(request_data));
+        if (!request_data) {
+            response.writeHead(200, { 'Content-Type': 'application/json' });
+            response.end(JSON.stringify(
+                {
+                    error_code: 400,
+                    error_message: "no data received"
+                }
+            ))
+            return;
+        }
+
+        getUserFromSession(request, (username) => {
+            if (!username) {
+                response.writeHead(200, { 'Content-Type': 'application/json' });
+                response.end(JSON.stringify(
+                    {
+                        error_code: 403,
+                        error_message: "User not logged in"
+                    }));
+                response.end();
+                return;
+            }
+            mongoDbUtils.getAccount(local_user = username, title = request_data.title, category = request_data.category,
+                (mongo_response) => {
+                    response.writeHead(200, { 'Content-Type': 'application/json' });
+                    if (!mongo_response) {
+                        response.end(JSON.stringify(
+                            {
+                                error_code: 404,
+                                error_message: "Account not found"
+                            }
+                        ))
+                    }
+                    else {
+                        response.end(JSON.stringify(mongo_response));
+                        response.end();
+                    }
+                });
+        })
+    })
+}
+
+function handleUpdateAccount(request, response) {
+    collectRequestData(request, (request_data) => {
+        console.log("handleUpdateAccount " + JSON.stringify(request_data));
+        if (!request_data) {
+            response.writeHead(200, { 'Content-Type': 'application/json' });
+            response.end(JSON.stringify(
+                {
+                    error_code: 400,
+                    error_message: "no data received"
+                }
+            ))
+            return;
+        }
+
+        getUserFromSession(request, (username) => {
+            if (!username) {
+                response.writeHead(200, { 'Content-Type': 'application/json' });
+                response.end(JSON.stringify(
+                    {
+                        error_code: 403,
+                        error_message: "User not logged in"
+                    }));
+                response.end();
+                return;
+            }
+            mongoDbUtils.updateAccount(username, request_data.title, request_data.category, request_data.username, request_data.email, request_data.comment,
+                (mongo_response) => {
+                    response.writeHead(200, { 'Content-Type': 'application/json' });
+                    if (!mongo_response) {
+                        response.end(JSON.stringify(
+                            {
+                                error_code: 404,
+                                error_message: "Account not found"
+                            }
+                        ))
+                    }
+                    else {
+                        response.end(JSON.stringify(mongo_response));
+                        response.end();
+                    }
+                });
+        })
+    })
+}
+
 function handleCall(request, response) {
     getUserFromSession(request, (username) => {
         var loggedIn = false;
@@ -319,7 +442,7 @@ function handleCall(request, response) {
             loggedIn = true;
         }
         var urlLowerCase = request.url.toLowerCase();
-        if (!loggedIn){
+        if (!loggedIn) {
             switch (urlLowerCase) {
                 case "/recommendation":
                 case "/recommendation.html":
@@ -334,7 +457,7 @@ function handleCall(request, response) {
                     urlLowerCase = "home";
             }
         }
-        
+
         switch (urlLowerCase) {
             case "/fbpage":
             case "/fbpage.html":
@@ -378,6 +501,17 @@ function handleCall(request, response) {
             case "/getloggedinuser":
                 handleGetLoggedInUser(request, response);
                 break;
+            case "/getaccounts":
+                handleGetAccounts(request, response);
+                break;
+            case "/getaccount":
+                handleGetAccount(request, response);
+                break;
+            case "/updateaccount":
+                if (request.method === "POST") {
+                    handleUpdateAccount(request, response);
+                }
+                break;
             default:
                 goToPage("home", request, response);
         }
@@ -385,9 +519,9 @@ function handleCall(request, response) {
 }
 
 http.createServer(function (request, response) {
-    process.on('uncaughtException', function (err) {
-        console.log('Caught exception: ' + err);
-    });
+    // process.on('uncaughtException', function (err) {
+    // console.log('Caught exception: ' + err);
+    // });
     try {
         console.log('request ', request.url);
         var cookies = new Cookies(request, response)
@@ -433,6 +567,6 @@ db.createCollection("session");
 db.session.createIndex({"username":1},{"unique":true})
 
 db.createCollection("account");
-db.account.createIndex({"username":1, "title":1, "category":1},{"unique":true})
+db.account.createIndex({"local_user":1, "title":1, "category":1},{"unique":true})
 
 */
