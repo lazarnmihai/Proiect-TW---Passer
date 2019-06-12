@@ -5,6 +5,8 @@ function validateUsername() {
         document.getElementById('message').style.color = 'rgb(194, 0, 0)';
         document.getElementById('message').innerHTML = 'Enter an username!';    
         valid = true; 
+    }else{
+        document.getElementById('message').innerHTML = '';
     }
 }
 
@@ -15,11 +17,11 @@ function validateEmail() {
         document.getElementById('message').style.color = 'rgb(41, 167, 41)';
         document.getElementById('message').innerHTML = 'You have a valid email.';
         valid = true;
-        return true;
+        //return true;
     } else {
         document.getElementById('message').style.color = 'rgb(194, 0, 0)';
         document.getElementById('message').innerHTML = 'You don&#39;t have a valid email.';
-        return false;
+        //return false;
     }
 }
 
@@ -42,4 +44,37 @@ function validatePassword() {
 
 };
 
+function validateLoginBtn(){
+    var username = validateUsername.valid;
+    var email = validateEmail.valid;
+    var password = validateEmail.valid;
+
+    if (username && email &&password){
+        return true;
+    }
+}
+
+function validateTitle() {
+    var valid = false;
+    if (document.getElementById('titleid').value == "") {
+        document.getElementById('message').style.color = 'rgb(194, 0, 0)';
+        document.getElementById('message').innerHTML = 'Enter an title!';    
+        valid = true; 
+    }else{
+        document.getElementById('message').innerHTML = '';
+    }
+}
+
+function validateCategory(){
+    var valid = false;
+
+    if (document.getElementById('category').value == "") {
+        document.getElementById('message').style.color = 'rgb(194, 0, 0)';
+        document.getElementById('message').innerHTML = 'Enter an category!';    
+        valid = true; 
+    }else{
+        document.getElementById('message').innerHTML = '';
+    }
+
+}
 
