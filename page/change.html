@@ -3,6 +3,7 @@
 
   <head>
     <link rel="import" href="headerTemplate.html">
+    <script type="text/javascript" src="../js/randomPassword.js"></script>
 
 
   </head>
@@ -26,26 +27,24 @@
         <a href="login.html">Login</a>
     </div>
   
-    <div class="article" >
-      <p><h3>Your accounts:</h3></p>
-      <ol type="1" class="ol">
-        <li>FaceBook: </li>
-           <ul>
-             <li class="li"><a href="fbPage.html">First account</a></li>
-             <li>second account</li>
-           </ul>
-        <li>Instagram</li>
-           <ul>
-             <li>first account</li>
-             <li>second account</li>
-           </ul>
-        <li>Gmail: </li>
-            <ul>
-              <li>first account</li>
-            </ul>
-      </ol>
-    </div>
+    <div class="article">
+            <p>This is your FaceBook 'First accout' accout: </p><br>
+            <div class="accountSet">
+              <p>Title: First accout</p>
+              <p>Username: Mark Zuckerberg</p>
+              <p>Email address: markIsTheBest@gmail.com</p>
+              <p>Password: ***********</p>
+              <p>Comment: I want to buy your app!</p>
+            </div><br>
+            
+        </div>
     
+    
+        <form name="randform">
+            <input type="text" name="randomfield" value="">&nbsp;
+            <input type="button" value="Generate Password" onClick="randomPassword();">
+            
+            </form>
 
     
     <div class="footer">
