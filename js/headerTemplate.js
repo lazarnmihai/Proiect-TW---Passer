@@ -7,7 +7,7 @@ function updateHeaderWithLoggedInUser() {
 
     request.done(function (jqXHR, textStatus, response) {
         if (!response.responseJSON.error_code) {
-            $(".header").innerHtml = response.responseText
+            $("#regLogHeader").text(response.responseJSON.username + ' ' +  response.responseJSON.email)
         } else {
             console.log("ceva eroare " + response.responseText)
         }

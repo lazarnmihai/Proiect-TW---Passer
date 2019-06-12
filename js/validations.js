@@ -1,80 +1,71 @@
 
 function validateUsername() {
-    var valid = false;
     if (document.getElementById('usernameid').value == "") {
         document.getElementById('message').style.color = 'rgb(194, 0, 0)';
-        document.getElementById('message').innerHTML = 'Enter an username!';    
-        valid = true; 
-    }else{
+        document.getElementById('message').innerHTML = 'Enter an username!';
+        return false;
+    } else {
         document.getElementById('message').innerHTML = '';
     }
+    return true;
 }
 
 function validateEmail() {
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    var valid = false;
     if (document.getElementById('emailid').value.match(mailformat)) {
         document.getElementById('message').style.color = 'rgb(41, 167, 41)';
         document.getElementById('message').innerHTML = 'You have a valid email.';
-        valid = true;
-        //return true;
+        return true;
     } else {
         document.getElementById('message').style.color = 'rgb(194, 0, 0)';
         document.getElementById('message').innerHTML = 'You don&#39;t have a valid email.';
-        //return false;
     }
+    return false;
 }
 
 function validatePassword() {
-    var valid = false;
-    if(document.getElementById('passwordid').value.length<6){
+    if (document.getElementById('passwordid').value.length < 6) {
         document.getElementById('message').style.color = 'rgb(194, 0, 0)';
         document.getElementById('message').innerHTML = 'Password should have at least 6 characters!';
-    }else{
+    } else {
         if (document.getElementById('passwordid').value == document.getElementById('confirmPasswordid').value) {
             document.getElementById('message').style.color = 'rgb(41, 167, 41)';
             document.getElementById('message').innerHTML = 'Password match.';
-            valid = true;
+            return true;
 
         } else {
             document.getElementById('message').style.color = 'rgb(194, 0, 0)';
             document.getElementById('message').innerHTML = 'Passwords do not match!';
         }
-        }
+    }
+
+    return false;
 
 };
 
-function validateLoginBtn(){
-    var username = validateUsername.valid;
-    var email = validateEmail.valid;
-    var password = validateEmail.valid;
-
-    if (username && email &&password){
-        return true;
-    }
+function validateLoginBtn() {
+    return validateUsername() && validateEmail() && validatePassword();
 }
 
 function validateTitle() {
-    var valid = false;
     if (document.getElementById('titleid').value == "") {
         document.getElementById('message').style.color = 'rgb(194, 0, 0)';
-        document.getElementById('message').innerHTML = 'Enter an title!';    
-        valid = true; 
-    }else{
+        document.getElementById('message').innerHTML = 'Enter an title!';
+        return false;
+    } else {
         document.getElementById('message').innerHTML = '';
+        return true
     }
 }
 
-function validateCategory(){
-    var valid = false;
-
+function validateCategory() {
     if (document.getElementById('category').value == "") {
         document.getElementById('message').style.color = 'rgb(194, 0, 0)';
-        document.getElementById('message').innerHTML = 'Enter an category!';    
-        valid = true; 
-    }else{
+        document.getElementById('message').innerHTML = 'Enter an category!';
+        return false;
+    } else {
         document.getElementById('message').innerHTML = '';
+        return true;
     }
-
 }
 

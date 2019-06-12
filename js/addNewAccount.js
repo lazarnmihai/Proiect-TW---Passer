@@ -2,6 +2,9 @@ $(document).ready(function () {
     $("#addAccountButton").click(function () {
         var serializedData = $("#addNewAccForm").serialize();
 
+        if (!(validateLoginBtn() && validateTitle())){
+            return;    
+        }
         var request = $.ajax({
             url: "addNewAccount",
             type: "post",
@@ -10,13 +13,13 @@ $(document).ready(function () {
         });
 
         request.done(function (jqXHR, textStatus, response) {
-            if (!response.responseJSON.error_code && validateLoginBtn && validateTitle.valid ) {
+            if (!response.responseJSON.error_code) {
                 document.getElementById('messageAddNewAcc').innerHTML = 'rgb(41, 167, 41)';
                 document.getElementById('messageAddNewAcc').innerHTML = 'Successful registration with: ' +"<br>"
                     + response.responseJSON.title ;
             } else {
                 document.getElementById('messageAddNewAcc').style.color = 'rgb(194, 0, 0)';
-                document.getElementById('messageAddNewAcc').innerHTML = "Complete all the fields!";
+                document.getElementById('messageAddNewAcc').innerHTML = response.responseJSON.error_message;
             }
             //$("#registerResultMessage").text(response.responseJSON.responseText);
         })
