@@ -15,6 +15,12 @@ $(document).ready(function () {
                 document.getElementById('messageLoggedIn').innerHTML = 'Successful login with username '
                     + response.responseJSON.username;
                 window.location.replace("/home.htmnl");
+                //disable form
+                document.getElementById('usernameid').disabled = true;
+                document.getElementById('passwordid').disabled = true;
+                document.getElementById('logoutSubmitButton').disabled = false;
+                document.getElementById('loginSubmitButton').disabled = false;
+
             } else {
                 document.getElementById('messageLoggedIn').style.color = 'rgb(194, 0, 0)';
                 document.getElementById('messageLoggedIn').innerHTML = response.responseJSON.error_message;
