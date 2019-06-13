@@ -51,9 +51,7 @@ function goToFile(filePath, request, response) {
 function goToPage(page, request, response) {
     var filePath = "./page/home.html"
     switch (page) {
-        case "fbpage":
-            filePath = "./page/fbPage.html"
-            break;
+        
         case "category":
             filePath = "./page/category.html"
             break;
@@ -459,10 +457,6 @@ function handleCall(request, response) {
         }
 
         switch (urlLowerCase) {
-            case "/fbpage":
-            case "/fbpage.html":
-                goToPage("fbpage", request, response);
-                break;
             case "/category":
             case "/category.html":
                 goToPage("category", request, response);
@@ -511,6 +505,14 @@ function handleCall(request, response) {
                 if (request.method === "POST") {
                     handleUpdateAccount(request, response);
                 }
+                break;
+            case "/getpassword":
+                handleGetAccount(request, response);
+                break;
+            case "/updatepassword":
+               if (request.method === "POST") {
+                    handleUpdateAccount(request, response);
+                  }
                 break;
             default:
                 goToPage("home", request, response);

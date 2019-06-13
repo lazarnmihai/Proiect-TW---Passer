@@ -45,7 +45,7 @@ module.exports = {
             collection.insertOne(
                 {
                     username: username,
-                    passwordInClear: password,
+                    //passwordInClear: password,
                     passwordAlg1: module.exports.sha256(password),
                     email: email
                 },
@@ -140,7 +140,7 @@ module.exports = {
                     local_user: local_user,
                     title: title,
                     username: username,
-                    passwordInClear: password,
+                    //passwordInClear: password,
                     passwordAlg1: module.exports.sha256(password),
                     email: email,
                     category: category,
@@ -209,6 +209,38 @@ module.exports = {
         })
     },
 
+    updateAccount: function (local_user, title, category, username, email, comment, callback) {
+        console.log("updateAccount " + local_user + " " + title + " " + category + " " + username + " " + email  + " " + comment);
+        module.exports.connectToDB(DB_NAME, COLLECTION_ACCOUNTS, (collection) => {
+            collection.updateOne(
+                {
+                    local_user: local_user,
+                    title: title,
+                    category: category
+                },
+                {
+                    $set: {
+                        username: username,
+                        email: email,
+                        comment: comment
+                    }
+                },
+                (err, result) => {
+                    if (err) console.log(err);
+                    if (err && err.code == 11000) {
+                        callback({
+                            error_code: 409,
+                            error_message: "Account already exists"
+                        });
+                    } else {
+                        console.log("From mongo updateAccount:");
+                        console.log(result);
+                        callback(result);
+                    }
+                })
+        })
+    },
+
     getPassword: function (local_user, title, category, callback) {
         module.exports.connectToDB(DB_NAME, COLLECTION_ACCOUNTS, (collection) => {
             collection.findOne(
@@ -251,35 +283,4 @@ module.exports = {
         })
     },
 
-    updateAccount: function (local_user, title, category, username, email, comment, callback) {
-        console.log("updateAccount " + local_user + " " + title + " " + category + " " + username + " " + email  + " " + comment);
-        module.exports.connectToDB(DB_NAME, COLLECTION_ACCOUNTS, (collection) => {
-            collection.updateOne(
-                {
-                    local_user: local_user,
-                    title: title,
-                    category: category
-                },
-                {
-                    $set: {
-                        username: username,
-                        email: email,
-                        comment: comment
-                    }
-                },
-                (err, result) => {
-                    if (err) console.log(err);
-                    if (err && err.code == 11000) {
-                        callback({
-                            error_code: 409,
-                            error_message: "Account already exists"
-                        });
-                    } else {
-                        console.log("From mongo updateAccount:");
-                        console.log(result);
-                        callback(result);
-                    }
-                })
-        })
-    },
 };
