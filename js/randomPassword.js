@@ -8,3 +8,4 @@ function randomPassword() {
 	}
 	document.randform.randomfield.value = password;
 }
+

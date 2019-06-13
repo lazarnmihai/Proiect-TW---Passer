@@ -144,11 +144,11 @@ function openUpdateAccountForm(category, title) {
   request.done(function (jqXHR, textStatus, response) {
     if (!response.responseJSON.error_code) {
 
-      document.getElementById("titleid").value = response.responseJSON.title
-      document.getElementById("usernameid").value = response.responseJSON.username
-      document.getElementById("emailid").value = response.responseJSON.email
-      document.getElementById("categoryid").value = response.responseJSON.category
-      document.getElementById("commentid").value = response.responseJSON.comment
+      document.getElementById("titleid").value = response.responseJSON.title;
+      document.getElementById("usernameid").value = response.responseJSON.username;
+      document.getElementById("emailid").value = response.responseJSON.email;
+      document.getElementById("categoryid").value = response.responseJSON.category;
+      document.getElementById("commentid").value = response.responseJSON.comment;
 
     } else {
       console.log(response.responseJSON)
@@ -171,11 +171,73 @@ function openUpdatePasswordForm(category, title) {
   document.querySelector("#divCategories").setAttribute("class", "ghost")
   document.querySelector("#divUpdateForm").setAttribute("class", "ghost")
   document.querySelector("#divChangePassword").setAttribute("class", "")
+
+  document.getElementById("passwordid").value = "";
+  document.getElementById("confirmPasswordid").value = "";
+
+  var request = $.ajax({
+    url: "getPassword",
+    type: "post",
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    data: 'category=' + category + '&title=' + title
+  });
+
+  request.done(function (jqXHR, textStatus, response) {
+    if (!response.responseJSON.error_code) {
+
+      document.getElementById("passwordid").value = response.responseJSON.password;
+      document.getElementById("confirmPasswordid").value = response.responseJSON.confirmPassword;
+
+    } else {
+      console.log(response.responseJSON)
+    }
+  })
+
+  request.fail(function (jqXHR, textStatus, errorThrown) {
+    console.log(errorThrown)
+  })
+
+
 }
 
 
 
+$(document).ready(function () {
 
+  loadAccountsIntoPage("category");
+
+  $("#changePassowordButton").click(function () {
+    var serializedData = $("#changePasswordForm").serialize();
+
+    var request = $.ajax({
+      url: "updatePassword",
+      type: "post",
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data: serializedData
+    });
+
+    request.done(function (jqXHR, textStatus, response) {
+      if (!response.responseJSON.error_code) {
+        showAllCategories();
+        document.getElementById('messageAddNewAcc').innerHTML = 'rgb(41, 167, 41)';
+        document.getElementById('messageAddNewAcc').innerHTML = 'Successful registration with: ' + "<br>"
+          + response.responseJSON.title;
+      } else {
+        document.getElementById('messageAddNewAcc').style.color = 'rgb(194, 0, 0)';
+        document.getElementById('messageAddNewAcc').innerHTML = response.responseJSON.error_message;
+        console.log(response.responseJSON)
+      }
+    })
+
+    if (request.fail(function (jqXHR, textStatus, errorThrown) {
+      document.getElementById('message').style.color = 'rgb(194, 0, 0)';
+      document.getElementById('message').innerHTML = "Something failed. Please retry."
+      console.log(errorThrown)
+    })) {
+      return false;
+    }
+  })
+})
 
 $(document).ready(function () {
 
