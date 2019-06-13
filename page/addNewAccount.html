@@ -5,6 +5,7 @@
   <link rel="import" href="headerTemplate.html">
   <script type="text/javascript" src="../js/addNewAccount.js"></script>
   <script type="text/javascript" src="../js/validations.js"></script>
+  <script type="text/javascript" src="../js/randomPassword.js"></script>
 
 </head>
 
@@ -34,13 +35,14 @@
       </p>
       <p> Add a new account that you want to keep <b>safe</b> with Passwer.</p>
       <br><br>
-      <samp id="messageAddNewAcc"></samp>
-      <span id='message'></span>
+      <samp id="messageAddNewAcc"></samp><br>
+      <span id='message'></span><br>
+      <span id='messagePassword'></span>
 
 
     </div>
     <div class="blockForm">
-      <form id="addNewAccForm">
+      <form id="addNewAccForm" name="randform">
         <div class="row">
           <div class="col-25">
             <label>Title:</label><br></div>
@@ -67,7 +69,7 @@
             <label>Password:</label><br></div>
           <div class="col-75">
             <input type="password" id="passwordid" name="password" required placeholder="Password"
-              onkeyup='validatePassword()' onfocusout='validatePassword()' size="35"><br></div>
+              onkeyup='validatePassword()' oninput="validatePasswordStrength()" onfocusout='validatePassword()' size="35"><br></div>
         </div>
         <div class="row">
           <div class="col-25">
@@ -76,6 +78,8 @@
             <input type="password" id="confirmPasswordid" name="repeatedpassword" required placeholder="Repeat password"
               onkeyup='validatePassword()' onfocusout='validatePassword()' size="35"><br></div>
         </div>
+            <input type="button" value="Generate Password" onClick="randomPassword();">
+            <input type="text" name="randomfield" value="">
         <div class="row">
           <div class="col-25">
             <label>Category:</label><br></div>

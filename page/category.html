@@ -5,6 +5,7 @@
   <link rel="import" href="headerTemplate.html">
   <script type="text/javascript" src="../js/category.js"></script>
   <script type="text/javascript" src="../js/validations.js"></script>
+  <script type="text/javascript" src="../js/randomPassword.js"></script>
 
 </head>
 
@@ -88,9 +89,10 @@
       <input type="submit" value="Back" class="accButton" onclick="showAllCategories()">
     </div>
   </div>
+
   <div class="ghost" id="divChangePassword">
     <div class="blockForm">
-      <form id="changePasswordForm">
+      <form id="changePasswordForm" name="randform">
         <div class="row">
           <div class="col-25">
             <label>Password:</label><br></div>
@@ -105,12 +107,18 @@
             <input type="password" id="confirmPasswordid" name="repeatedpassword" required placeholder="Repeat password"
               onkeyup='validatePassword()' onfocusout='validatePassword()' size="35"><br></div>
         </div>
+
+          <input type="button" value="Generate Password" onClick="randomPassword();">
+          <input type="text" name="randomfield" value=""><br>
+          
         <input type="submit" value="Change Password" class="accButton" id="changePassowordButton">
       </form>
       <br>
       <input type="submit" value="Back" class="accButton" onclick="showAllCategories()">
     </div>
   </div>
+
+  
   <div class="footer">
     <h6>
       <b>Proiect TW<br> Lazar Mihai & Condurache Vlad</b>
